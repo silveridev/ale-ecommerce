@@ -1,0 +1,29 @@
+{
+  "name": "ale-ecommerce",
+  "version": "1.0.0",
+  "description": "Course project.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/silveridev/ale-ecommerce.git"
+  },
+  "keywords": [
+    "Ecommerce",
+    "nodejs",
+    "reactjs"
+  ],
+  "author": "Alessandro Silveri",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/silveridev/ale-ecommerce/issues"
+  },
+  "homepage": "https://github.com/silveridev/ale-ecommerce#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "mongoose": "^5.0.14"
+  }
+}
