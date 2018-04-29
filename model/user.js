@@ -18,7 +18,9 @@ const UserSchema = new Schema({
 	history: {
 		date: Date,
 		paid: { type: Number, defalut: 0 }
-	}
+	},
+	updated: { type: Date, default: Date.now },
+	userType: { type: String, default: "customer" }
 });
 
 // Hash the password before we even save it to the database;

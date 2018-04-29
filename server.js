@@ -15,6 +15,7 @@ const Category = require("./model/category");
 const userRoutes = require("./routes/user");
 const mainRoutes = require("./routes/main");
 const adminRoutes = require("./routes/admin");
+const api = require("./api/api");
 
 const app = express();
 mongoose.connect(config.db, err => {
@@ -65,6 +66,7 @@ app.use((req, res, next) => {
 app.use(mainRoutes);
 app.use(userRoutes);
 app.use("/admin", adminRoutes);
+app.use("/api", api);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log("Server is running on port 3000"));
