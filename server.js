@@ -1,56 +1,70 @@
 const express = require("express");
-const morgan = require('morgan');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const _ = require('lodash');
-const ejs = require('ejs');
-const ejsMate = require('ejs-mate');
+const morgan = require("morgan");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const ejsMate = require("ejs-mate");
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
+const flash = require("express-flash");
+const config = require("./config");
+const MongoStore = require("connect-mongo")(session);
+const passport = require("passport");
+require("./config/passport");
+const Category = require("./model/category");
 
-const User = require('./model/user');
+const userRoutes = require("./routes/user");
+const mainRoutes = require("./routes/main");
+const adminRoutes = require("./routes/admin");
 
 const app = express();
-mongoose.connect('mongodb://root:aledev@ds161939.mlab.com:61939/ecommerce', (err) => {
+mongoose.connect(config.db, err => {
 	if (err) {
 		console.error(err);
 	} else {
 		console.log("Connected to the database");
 	}
-})
+});
 
 //middleware
-app.use(express.static(__dirname + '/public'));
-app.use(morgan('dev'));
+app.use(express.static(__dirname + "/public"));
+app.use(morgan("dev"));
+app.use(
+	session({
+		secret: config.secretKey,
+		resave: true,
+		saveUninitialized: true,
+		cookie: {
+			maxAge: 3 * 60 * 60 * 1000,
+			expires: new Date(Date.now() + 3 * 60 * 60 * 1000)
+		},
+		store: new MongoStore({ url: config.db, autoReconnect: true })
+	})
+);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.engine('ejs', ejsMate);
-app.set('view engine', 'ejs');
+app.set("view engine", "ejs");
+app.engine("ejs", ejsMate);
+app.use(flash());
+app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(function(req, res, next) {
+	app.locals.user = req.user;
+	next();
+});
+
+app.use((req, res, next) => {
+	Category.find({}, (error, categories) => {
+		if (error) return next(error);
+		res.locals.categories = categories;
+		next();
+	});
+});
 
 // routes
-app.get("/", (req, res) => {
-	res.render('main/home');
-});
-
-app.post('/register', (req, res, next) => {
-	const user = new User();
-	const { username, password, email } = _.pick(req.body, ['username', 'password', 'email']);
-
-	if (username, password, email) {
-		user.profile.name = username;
-		user.password = password;
-		user.email = email;
-
-		user.save(error => {
-			if (error) return next(error);
-			res.status(200).json({ success: true, message: "User has been successfully created." });
-		})
-	} else {
-		res.status(400).json({ success: false, message: 'Username, password and email are all required' });
-	}
-});
-
+app.use(mainRoutes);
+app.use(userRoutes);
+app.use("/admin", adminRoutes);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log("Server is running on port 3000"));
-
-
-

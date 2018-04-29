@@ -1,0 +1,30 @@
+<% layout('layout') %>
+	<div class="row justify-content-center">
+		<img class="img-circle img-responsive img-center" src="<%= user.profile.picture %>" alt="No image">
+	</div>
+	<div class="row justify-content-center">
+		<h3>
+			<%= user.profile.name %>
+		</h3>
+	</div>
+	<div class="row justify-content-center">
+		<h3>
+			<%= user.email %>
+		</h3>
+	</div>
+	<div class="row justify-content-center">
+		<h3>
+			<% if (user.address === '' || typeof user.address === 'undefined' ) { %>
+				<h3>Address:
+					<span style="color: #c0392b; font-weight: bold">You have no address yet!</span>
+				</h3>
+				<% } else { %>
+					<h3>Address:
+						<%= user.address %>
+					</h3>
+					<% } %>
+		</h3>
+	</div>
+	<div class="row justify-content-center">
+		<a class="btn btn-primary" href="/profile/edit" role="button">Edit profile</a>
+	</div>
