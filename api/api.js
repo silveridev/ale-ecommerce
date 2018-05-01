@@ -29,4 +29,17 @@ route.get("/:name", (req, res, next) => {
 	res.json({ message: "Success" });
 });
 
+route.post("/search", (req, res, next) => {
+	const { search } = req.query;
+	const notFoundMessage = "Product not found";
+	if (search) {
+		Product.search(search, function(err, products) {
+			if (err) res.json({ success: false, error: err });
+			res.json({ success: true, products });
+		});
+	} else {
+		res.json({ success: true, message: notFoundMessage });
+	}
+});
+
 module.exports = route;

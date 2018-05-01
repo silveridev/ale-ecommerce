@@ -1,6 +1,22 @@
 <% layout('layout') %>
+
+	<div class="jumbotron">
+		<div class="container">
+			<h1 class="display-3">Welcome to Ale-Store</h1>
+			<p>Unicam Web programming course project by Alessandro Silveri</p>
+			<div class="input-group col-6 mb-3 offset-md-3">
+				<input type="text" name="search_item" id="serach_item" class="form-control" placeholder="Search a product ..." aria-label="Search a product ..."
+				 aria-describedby="basic-addon2" required>
+				<div class="input-group-append">
+					<button type="submit" class="btn btn-primary btn-lg" id="search_btn">
+						<i class="fas fa-search"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="container">
-		<div class="row">
+		<div class="row" id="search_result">
 			<% for (var i=0; i < products.length; i++) { %>
 				<div class="col-md-4 mb-3">
 					<div class="card">
@@ -23,14 +39,10 @@
 		</div>
 	</div>
 
-	<div>Current page:
-		<%= currPage %>
-	</div>
-
-	<nav aria-label="Page navigation example">
+	<nav aria-label="Page navigation example" id="pagination">
 		<ul class="pagination justify-content-center">
 			<% for(var i=0; i<page; i++) { %>
-				<% if(i===0) { %>
+				<% if(currPage===1) { %>
 					<li class="page-item disabled">
 						<a class="page-link" href="#" aria-label="Previous">
 							<span aria-hidden="true">&laquo;</span>
