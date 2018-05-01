@@ -7,7 +7,18 @@
 
 	<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 		<ul class="navbar-nav mr-auto">
-
+			<li class="nav-item active">
+				<a class="nav-link" href="#">Home
+					<span class="sr-only">(current)</span>
+				</a>
+			</li>
+			<% for(var i=0; i<categories.length; i++) { %>
+				<li class="nav-item">
+					<a class="nav-link" href="/products/<%= categories[i]._id %>">
+						<%= categories[i].name %>
+					</a>
+				</li>
+				<% } %>
 		</ul>
 		<ul class="navbar-nav navbar-right">
 			<% if(!user) { %>
@@ -28,7 +39,7 @@
 					<li class="nav-item">
 						<a class="nav-link" href="/logout">Logout</a>
 					</li>
-				<% } %>
+					<% } %>
 
 		</ul>
 	</div>

@@ -7,12 +7,13 @@ const Product = require("../model/product");
 route.get("/:name", (req, res, next) => {
 	async.waterfall([
 		function(callback) {
-			Category.find({ name: req.params.name }, (error, category) => {
+			Category.findOne({ name: req.params.name }, (error, category) => {
 				if (error) return next(error);
 				callback(null, category);
 			});
 		},
 		function(category) {
+			console.log(category);
 			for (let i = 0; i < 30; i++) {
 				var product = new Product();
 				product.category = category._id;
