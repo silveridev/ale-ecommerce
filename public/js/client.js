@@ -50,4 +50,6 @@
 
 		$("#search_result").append(html);
 	}
+
+	// console.log(window.location.pathname);
 })(jQuery);

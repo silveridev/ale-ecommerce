@@ -9,7 +9,6 @@
 		"node": "8.11.x"
 	},
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "node server.js",
 		"dev": "nodemon server.js",
 		"heroku-postbuild": "yarn install"
@@ -18,11 +17,7 @@
 		"type": "git",
 		"url": "git+https://github.com/silveridev/ale-ecommerce.git"
 	},
-	"keywords": [
-		"Ecommerce",
-		"nodejs",
-		"reactjs"
-	],
+	"keywords": ["Ecommerce", "nodejs", "reactjs"],
 	"author": "Alessandro Silveri",
 	"license": "ISC",
 	"bugs": {

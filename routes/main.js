@@ -6,7 +6,7 @@ function paginate(req, res, next) {
 	const { page } = req.params;
 
 	Product.find()
-		.skip(perPage * page)
+		.skip(perPage * (page - 1))
 		.limit(perPage)
 		.populate("category")
 		.exec((error, products) => {

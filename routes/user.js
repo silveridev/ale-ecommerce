@@ -1,7 +1,9 @@
 const route = require("express").Router();
 const User = require("../model/user");
 const _ = require("lodash");
+const waterfall = require("async/waterfall");
 const passport = require("passport");
+const Cart = require("../model/cart");
 
 route.get("/login", function(req, res) {
 	if (req.user) return res.redirect("/");
@@ -33,43 +35,56 @@ route.get("/register", (req, res) => {
 });
 
 route.post("/register", (req, res, next) => {
-	const user = new User();
-	const { username, password, email } = _.pick(req.body, [
-		"username",
-		"password",
-		"email"
-	]);
+	waterfall([
+		function(cb) {
+			const user = new User();
+			const { username, password, email } = _.pick(req.body, [
+				"username",
+				"password",
+				"email"
+			]);
 
-	user.profile.picture = user.gravatar();
+			user.profile.picture = user.gravatar();
 
-	if ((username, password, email)) {
-		user.profile.name = username;
-		user.password = password;
-		user.email = email;
+			if ((username, password, email)) {
+				user.profile.name = username;
+				user.password = password;
+				user.email = email;
 
-		User.findOne({ email }, (error, existingUser) => {
-			if (existingUser) {
-				req.flash(
-					"errors",
-					`Account with the email address${email} already exists`
-				);
-				return res.redirect("/register");
+				User.findOne({ email }, (error, existingUser) => {
+					if (existingUser) {
+						req.flash(
+							"errors",
+							`Account with the email address ${email} already exists`
+						);
+						return res.redirect("/register");
+					}
+					user.save(error => {
+						if (error) return next(error);
+						cb(null, user);
+					});
+				});
+			} else {
+				res.status(400).json({
+					success: false,
+					message: "Username, password and email are all required"
+				});
 			}
-			user.save(error => {
-				if (error) return next(error);
+		},
 
+		function(user) {
+			console.log("Registering user: ", user);
+			var cart = new Cart();
+			cart.owner = user._id;
+			cart.save(error => {
+				if (error) next(error);
 				req.logIn(user, function(err) {
 					if (err) return next(err);
-					res.redirect("/");
+					res.redirect("/profile");
 				});
 			});
-		});
-	} else {
-		res.status(400).json({
-			success: false,
-			message: "Username, password and email are all required"
-		});
-	}
+		}
+	]);
 });
 
 route.get("/logout", (req, res) => {

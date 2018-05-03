@@ -8,3 +8,10 @@ main {
 	margin-left: 5px;
 	margin-right: 5px;
 }
+input:read-only {
+	color: white;
+}
+
+input:read-only:focus {
+	color: white;
+}
