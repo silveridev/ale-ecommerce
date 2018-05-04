@@ -1,5 +1,6 @@
 const main = require("express").Router();
 const Product = require("../model/product");
+const Cart = require("../model/cart");
 
 function paginate(req, res, next) {
 	const perPage = 9;
@@ -54,6 +55,42 @@ main.get("/product/:id", (req, res, next) => {
 		if (error) return next(error);
 		res.render("main/product", { product });
 	});
+});
+
+main.post("/product/:product_id", (req, res, next) => {
+	if (req.user) {
+		try {
+			Cart.findOne({ owner: req.user._id }, function(error, cart) {
+				cart.items.push({
+					item: req.body.id,
+					price: parseInt(req.body.price),
+					quantity: req.body.quantity && parseInt(req.body.quantity)
+				});
+
+				cart.total = (cart.total * parseFloat(req.body.price)).toFixed(2);
+
+				cart.save(err => {
+					if (err) return next(err);
+					return res.redirect("/cart");
+				});
+			});
+		} catch (error) {
+			console.error("Could not find the cart, Error: ", error);
+		}
+	} else {
+		res.redirect("/login");
+	}
+});
+
+main.get("/cart", (req, res, next) => {
+	Cart.findOne({ owner: req.user._id })
+		.populate("items.item")
+		.exec((error, foundCart) => {
+			if (error) next(error);
+			res.render("cart", {
+				userCart: foundCart
+			});
+		});
 });
 
 module.exports = main;

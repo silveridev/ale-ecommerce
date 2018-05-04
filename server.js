@@ -11,6 +11,7 @@ const MongoStore = require("connect-mongo")(session);
 const passport = require("passport");
 require("./config/passport");
 const Category = require("./model/category");
+const totalItemInCart = require("./middleware").totalItemInCart;
 
 const userRoutes = require("./routes/user");
 const mainRoutes = require("./routes/main");
@@ -61,6 +62,8 @@ app.use((req, res, next) => {
 		next();
 	});
 });
+
+app.use(totalItemInCart);
 
 // routes
 app.use(mainRoutes);

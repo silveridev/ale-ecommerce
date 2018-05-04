@@ -1,14 +1,40 @@
 <% layout('layout') %>
 
-	<div class="container">
+	<div class="container product-page">
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-5">
 				<img class="w-100 h-auto" src="<%= product.image %>" alt="No photo available">
 			</div>
-			<div class="col-md-4">
-				<%= product.name %>
+			<div class="col-md-7 product-info">
+				<form method="POST">
+					<div class="product-name">
+						<%= product.name %>
+					</div>
+					<div class="product-price">
+						<%= product.price %> &euro;
+					</div>
+
+					<div class="btn-group" role="group" aria-label="Basic example">
+						<button type="button" class="btn btn-secondary"> - </button>
+						<button type="button" class="btn btn-secondary disabled ">0</button>
+						<button type="button" class="btn btn-secondary"> + </button>
+					</div>
+
+					<div class="form-group">
+						<input type="hidden" id="productId" name="id" value="<%= product._id %>" />
+						<input type="hidden" id="product_price" name="price" value='<%= product.price %>' />
+
+					</div>
+
+					<div>
+						<% if(user) { %>
+							<button type="submit" class="btn btn-primary btn-lg">Add to cart</button>
+							<% } else { %>
+								<a href="/login" class="btn btn-warning btn-lg">Login</a>
+								<% } %>
+					</div>
+				</form>
 			</div>
-			<div class="col-md-4">
-				<%= product.price %> &euro; </div>
+
 		</div>
 	</div>

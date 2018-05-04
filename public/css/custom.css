@@ -15,3 +15,28 @@ input:read-only {
 input:read-only:focus {
 	color: white;
 }
+
+.product-page .product-info div {
+	margin: 20px;
+}
+.product-page .product-name {
+	font-size: 36px;
+	font-weight: bold;
+}
+.product-page .product-price {
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.cart-item {
+	margin: 20px 0;
+	padding: 0 20px;
+}
+
+.cart-item--image {
+	text-align: center;
+}
+
+.cart-item--image img {
+	width: 200px;
+}

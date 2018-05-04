@@ -1,0 +1,24 @@
+<% layout('layout') %>
+
+	<%= userCart %>
+
+		<div class="container">
+			<% for (var i=0; i < userCart.items.length; i++) { %>
+				<div class="row cart-item">
+					<div class="col-6 cart-item--image">
+						<img src="<%= userCart.items[i].item.image %>" alt="" />
+					</div>
+					<div class="col-4">
+						<%= userCart.items[i].item.name %>
+					</div>
+					<div class="col-2">
+						<div>
+							<%= userCart.items[i].item.price %>
+						</div>
+						<div>
+							<%= userCart.items[i].quantity %>
+						</div>
+					</div>
+				</div>
+				<% } %>
+		</div>
