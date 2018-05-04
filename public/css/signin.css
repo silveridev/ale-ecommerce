@@ -41,3 +41,9 @@ body {
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
 }
+
+.ale-store {
+	color: #7952b3;
+	font-size: 4rem;
+	margin-bottom: 1rem;
+}

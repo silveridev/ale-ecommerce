@@ -1,24 +1,44 @@
 <% layout('layout') %>
 
-	<%= userCart %>
+	<div class="container">
+		<% if(typeof remove != "undefined") { %>
+			<div class="alert alert-success alert-dismissible fade show" role="alert">
+				<%= remove %>
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+			</div>
+			<% } %>
+				<% if(userCart.items.length > 0) { %>
+					<% for (var i=0; i < userCart.items.length; i++) { %>
 
-		<div class="container">
-			<% for (var i=0; i < userCart.items.length; i++) { %>
-				<div class="row cart-item">
-					<div class="col-6 cart-item--image">
-						<img src="<%= userCart.items[i].item.image %>" alt="" />
-					</div>
-					<div class="col-4">
-						<%= userCart.items[i].item.name %>
-					</div>
-					<div class="col-2">
-						<div>
-							<%= userCart.items[i].item.price %>
+						<div class="row cart-item">
+							<div class="col-6 cart-item--image">
+								<!-- <img src="<%= userCart.items[i].item.image %>" alt="" /> -->
+								<img src="https://dummyimage.com/300">
+
+							</div>
+							<div class="col-4">
+								<%= userCart.items[i].item.name %>
+							</div>
+							<div class="col-2 cart-item--info">
+								<div>
+									<%= userCart.items[i].item.price %>
+								</div>
+								<div>
+									<%= userCart.items[i].quantity %>
+								</div>
+								<form action="/cart/remove" method="POST">
+									<input type="hidden" name='item' value='<%= userCart.items[i]._id %>'>
+									<input type="hidden" name='price' value="<%= userCart.items[i].price %>">
+									<button class="btn btn-danger" type="submit">Remove</button>
+								</form>
+							</div>
 						</div>
-						<div>
-							<%= userCart.items[i].quantity %>
-						</div>
-					</div>
-				</div>
-				<% } %>
-		</div>
+						<% } %>
+							<% } else { %>
+								<div>
+									There is no item in the carts yet.
+								</div>
+								<% } %>
+	</div>

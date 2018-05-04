@@ -1,6 +1,7 @@
 main {
 	margin-top: 56px;
 }
+
 .container {
 	padding-top: 2rem;
 }
@@ -30,7 +31,8 @@ input:read-only:focus {
 
 .cart-item {
 	margin: 20px 0;
-	padding: 0 20px;
+	padding: 20px;
+	min-height: 105px;
 }
 
 .cart-item--image {
@@ -39,4 +41,11 @@ input:read-only:focus {
 
 .cart-item--image img {
 	width: 200px;
+}
+
+.cart-item--info {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
 }

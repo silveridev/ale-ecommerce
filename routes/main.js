@@ -93,4 +93,17 @@ main.get("/cart", (req, res, next) => {
 		});
 });
 
+main.post("/cart/remove", (req, res, next) => {
+	Cart.findOne({ owner: req.user._id }, (error, foundCart) => {
+		foundCart.items.pull(String(req.body.item));
+
+		foundCart.total = foundCart.total = parseFloat(req.body.price).toFixed(2);
+		foundCart.save((err, found) => {
+			if (err) next(err);
+			req.flash("remove", "Successfully removed");
+			res.redirect("/cart");
+		});
+	});
+});
+
 module.exports = main;
