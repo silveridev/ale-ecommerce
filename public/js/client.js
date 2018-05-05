@@ -51,5 +51,27 @@
 		$("#search_result").append(html);
 	}
 
-	// console.log(window.location.pathname);
+	$("#plus").on("click", function(e) {
+		e.preventDefault();
+
+		var quantity = parseInt($("#quantity").val());
+		quantity += 1;
+
+		$("#quantity").val(quantity);
+		$("#total").html(quantity);
+		$("#totalHidden").val(quantity * $("#product_price").val());
+	});
+
+	$("#minus").on("click", function(e) {
+		e.preventDefault();
+
+		var quantity = parseInt($("#quantity").val());
+		if (quantity > 1) {
+			quantity -= 1;
+
+			$("#quantity").val(quantity);
+			$("#total").html(quantity);
+			$("#totalHidden").val(quantity * $("#product_price").val());
+		}
+	});
 })(jQuery);

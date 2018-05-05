@@ -28,3 +28,36 @@
 	<div class="row justify-content-center">
 		<a class="btn btn-primary" href="/profile/edit" role="button">Edit profile</a>
 	</div>
+	<h2 class="text-success">
+		Purchase history:
+	</h2>
+	<div class="row">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Item's Name</th>
+					<th scope="col">Paid</th>
+					<th scope="col">Date</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% for(var i=0; i<user.history.length; i++) { %>
+					<tr>
+						<th scope="row">
+							<%= i %>
+						</th>
+						<td>
+							<%= user.history[i].item.name  %>
+						</td>
+						<td>
+							<%= user.history[i].paid %>
+						</td>
+						<td>
+							<%= user.history[i].date %>
+						</td>
+					</tr>
+					<% } %>
+			</tbody>
+		</table>
+	</div>

@@ -15,10 +15,13 @@ const UserSchema = new Schema({
 		name: { type: String, default: "" },
 		picture: { type: String, defalut: "" }
 	},
-	history: {
-		date: Date,
-		paid: { type: Number, defalut: 0 }
-	},
+	history: [
+		{
+			date: String,
+			paid: { type: Number, defalut: 0 },
+			item: { type: Schema.Types.ObjectId, ref: "Product" }
+		}
+	],
 	updated: { type: Date, default: Date.now },
 	userType: { type: String, default: "customer" }
 });

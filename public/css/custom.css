@@ -91,3 +91,6 @@ input:read-only:focus {
 .credit-card-box .panel-heading img {
 	min-width: 180px;
 }
+table {
+	margin: 20px;
+}

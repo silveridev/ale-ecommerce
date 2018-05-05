@@ -4,6 +4,7 @@ const _ = require("lodash");
 const waterfall = require("async/waterfall");
 const passport = require("passport");
 const Cart = require("../model/cart");
+const { isAuthenticated } = require("../middleware");
 
 route.get("/login", function(req, res) {
 	if (req.user) return res.redirect("/");
@@ -21,11 +22,13 @@ route.post(
 	})
 );
 
-route.get("/profile", (req, res, next) => {
-	User.findById(req.user._id, function(error, user) {
-		if (error) return next(error);
-		res.render("accounts/profile", { user });
-	});
+route.get("/profile", isAuthenticated, (req, res, next) => {
+	User.findById(req.user._id)
+		.populate("history.item")
+		.exec((error, user) => {
+			if (error) return next(error);
+			res.render("accounts/profile", { user });
+		});
 });
 
 route.get("/register", (req, res) => {
@@ -73,7 +76,6 @@ route.post("/register", (req, res, next) => {
 		},
 
 		function(user) {
-			console.log("Registering user: ", user);
 			var cart = new Cart();
 			cart.owner = user._id;
 			cart.save(error => {

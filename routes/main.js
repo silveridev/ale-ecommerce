@@ -2,6 +2,9 @@ const main = require("express").Router();
 const Product = require("../model/product");
 const Cart = require("../model/cart");
 const stripe = require("stripe")("sk_test_41L0gRe94OSsJLRQHBBZIFHF");
+const waterfall = require("async/waterfall");
+const User = require("../model/user");
+const moment = require("moment");
 
 function paginate(req, res, next) {
 	const perPage = 9;
@@ -25,6 +28,7 @@ function paginate(req, res, next) {
 }
 
 main.get("/", (req, res, next) => {
+	console.log("req.isAuthenticated: ", req.isAuthenticated());
 	const { page } = req.params;
 	if (page) {
 		if (page === 1) {
@@ -64,11 +68,10 @@ main.post("/product/:product_id", (req, res, next) => {
 			Cart.findOne({ owner: req.user._id }, function(error, cart) {
 				cart.items.push({
 					item: req.body.id,
-					price: parseInt(req.body.price),
+					price: parseFloat(req.body.price),
 					quantity: req.body.quantity && parseInt(req.body.quantity)
 				});
-
-				cart.total = (cart.total * parseFloat(req.body.price)).toFixed(2);
+				cart.totoal = cart.totoal + parseFloat(req.body.totalMoney);
 
 				cart.save(err => {
 					if (err) return next(err);
@@ -98,7 +101,7 @@ main.post("/cart/remove", (req, res, next) => {
 	Cart.findOne({ owner: req.user._id }, (error, foundCart) => {
 		foundCart.items.pull(String(req.body.item));
 
-		foundCart.total = foundCart.total = parseFloat(req.body.price).toFixed(2);
+		foundCart.totoal = foundCart.totoal - parseFloat(req.body.price).toFixed(2);
 		foundCart.save((err, found) => {
 			if (err) next(err);
 			req.flash("remove", "Successfully removed");
@@ -109,7 +112,6 @@ main.post("/cart/remove", (req, res, next) => {
 
 main.post("/payment", (req, res, next) => {
 	let stripeToken = req.body.stripeToken;
-	console.log("req body: ", req.body);
 	let currentCharges = Math.round(req.body.stripeMoney * 100);
 	stripe.customers
 		.create({
@@ -122,7 +124,43 @@ main.post("/payment", (req, res, next) => {
 				customer: customer.id
 			});
 		})
-		.then(charge => res.redirect("/profile"));
+		.then(charge => {
+			waterfall([
+				function(cb) {
+					Cart.findOne({ owner: req.user.id }, function(error, cart) {
+						cb(error, cart);
+					});
+				},
+				function(cart, cb) {
+					User.findOne({ _id: req.user._id }, (err, user) => {
+						if (user) {
+							for (var i = 0; i < cart.items.length; i++) {
+								user.history.push({
+									item: cart.items[i].item,
+									paid: cart.totoal,
+									date: moment(Date.now()).format("MMMM Do YYYY, H:mm")
+								});
+							}
+							user.save((err, user) => {
+								if (err) return next(err);
+								cb(err, user);
+							});
+						}
+					});
+				},
+				function(user) {
+					Cart.update(
+						{ owner: user._id },
+						{ $set: { items: [], totoal: 0 } },
+						(error, updated) => {
+							if (updated) {
+								res.redirect("/profile");
+							}
+						}
+					);
+				}
+			]);
+		});
 });
 
 module.exports = main;

@@ -2,7 +2,7 @@
 
 	<div class="container">
 		<div class="row">
-			<div class="col-8">
+			<div class="col-9">
 				<% if(typeof remove != "undefined") { %>
 					<div class="alert alert-success alert-dismissible fade show" role="alert">
 						<%= remove %>
@@ -25,14 +25,16 @@
 									</div>
 									<div class="col-2 cart-item--info">
 										<div>
+											Price:
 											<%= userCart.items[i].item.price %> &euro;
 										</div>
 										<div>
+											Quantity:
 											<%= userCart.items[i].quantity %>
 										</div>
 										<form action="/cart/remove" method="POST">
 											<input type="hidden" name='item' value='<%= userCart.items[i]._id %>'>
-											<input type="hidden" name='price' value="<%= userCart.items[i].price %>">
+											<input type="hidden" name='price' value="<%= (userCart.items[i].price*userCart.items[i].quantity) %>">
 											<button class="btn btn-danger" type="submit">Remove</button>
 										</form>
 									</div>
@@ -44,21 +46,23 @@
 										</div>
 										<% } %>
 			</div>
-			<div class="col-4">
+			<div class="col-3">
 				<h4>Total:
-					<%= userCart.total %>
+					<%= userCart.totoal %>
 				</h4>
-				<div class="form-group">
-					<input type="hidden" value="<%= userCart.total %>">
-					<!-- <button class="btn btn-primary btn-lg" type="submit" data-toggle="modal" data-target="#exampleModal">Checkout</button> -->
-					<form action="/payment" method="POST">
-						<script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="pk_test_5wbMktvMea4kFlWKxkRKfGfC" data-amount="999"
-						 data-name="Ale-Store" data-description="" data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-						 data-locale="auto" data-currency="eur" data-email="">
-						</script>
-						<input type="hidden" name="stripeMoney" value="9.9">
-					</form>
-				</div>
+				<% if(userCart.totoal > 0) { %>
+					<div class="form-group">
+						<input type="hidden" value="<%= userCart.total %>">
+						<!-- <button class="btn btn-primary btn-lg" type="submit" data-toggle="modal" data-target="#exampleModal">Checkout</button> -->
+						<form action="/payment" method="POST">
+							<script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="pk_test_5wbMktvMea4kFlWKxkRKfGfC" data-amount="<%= (userCart.totoal*100) %>"
+							 data-name="Ale-Store" data-description="" data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+							 data-locale="auto" data-currency="eur" data-email="">
+							</script>
+							<input type="hidden" name="stripeMoney" value="<%= userCart.totoal %>">
+						</form>
+					</div>
+					<% } %>
 			</div>
 		</div>
 
