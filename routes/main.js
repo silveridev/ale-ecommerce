@@ -1,6 +1,7 @@
 const main = require("express").Router();
 const Product = require("../model/product");
 const Cart = require("../model/cart");
+const stripe = require("stripe")("sk_test_41L0gRe94OSsJLRQHBBZIFHF");
 
 function paginate(req, res, next) {
 	const perPage = 9;
@@ -104,6 +105,24 @@ main.post("/cart/remove", (req, res, next) => {
 			res.redirect("/cart");
 		});
 	});
+});
+
+main.post("/payment", (req, res, next) => {
+	let stripeToken = req.body.stripeToken;
+	console.log("req body: ", req.body);
+	let currentCharges = Math.round(req.body.stripeMoney * 100);
+	stripe.customers
+		.create({
+			source: stripeToken
+		})
+		.then(customer => {
+			return stripe.charges.create({
+				amount: currentCharges,
+				currency: "eur",
+				customer: customer.id
+			});
+		})
+		.then(charge => res.redirect("/profile"));
 });
 
 module.exports = main;

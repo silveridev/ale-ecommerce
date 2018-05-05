@@ -1,44 +1,65 @@
 <% layout('layout') %>
 
 	<div class="container">
-		<% if(typeof remove != "undefined") { %>
-			<div class="alert alert-success alert-dismissible fade show" role="alert">
-				<%= remove %>
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-			</div>
-			<% } %>
-				<% if(userCart.items.length > 0) { %>
-					<% for (var i=0; i < userCart.items.length; i++) { %>
+		<div class="row">
+			<div class="col-8">
+				<% if(typeof remove != "undefined") { %>
+					<div class="alert alert-success alert-dismissible fade show" role="alert">
+						<%= remove %>
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+					</div>
+					<% } %>
+						<% if(userCart.items.length > 0) { %>
+							<% for (var i=0; i < userCart.items.length; i++) { %>
 
-						<div class="row cart-item">
-							<div class="col-6 cart-item--image">
-								<!-- <img src="<%= userCart.items[i].item.image %>" alt="" /> -->
-								<img src="https://dummyimage.com/300">
+								<div class="row cart-item">
+									<div class="col-6 cart-item--image">
+										<!-- <img src="<%= userCart.items[i].item.image %>" alt="" /> -->
+										<img src="https://dummyimage.com/300">
 
-							</div>
-							<div class="col-4">
-								<%= userCart.items[i].item.name %>
-							</div>
-							<div class="col-2 cart-item--info">
-								<div>
-									<%= userCart.items[i].item.price %>
-								</div>
-								<div>
-									<%= userCart.items[i].quantity %>
-								</div>
-								<form action="/cart/remove" method="POST">
-									<input type="hidden" name='item' value='<%= userCart.items[i]._id %>'>
-									<input type="hidden" name='price' value="<%= userCart.items[i].price %>">
-									<button class="btn btn-danger" type="submit">Remove</button>
-								</form>
-							</div>
-						</div>
-						<% } %>
-							<% } else { %>
-								<div>
-									There is no item in the carts yet.
+									</div>
+									<div class="col-4">
+										<%= userCart.items[i].item.name %>
+									</div>
+									<div class="col-2 cart-item--info">
+										<div>
+											<%= userCart.items[i].item.price %> &euro;
+										</div>
+										<div>
+											<%= userCart.items[i].quantity %>
+										</div>
+										<form action="/cart/remove" method="POST">
+											<input type="hidden" name='item' value='<%= userCart.items[i]._id %>'>
+											<input type="hidden" name='price' value="<%= userCart.items[i].price %>">
+											<button class="btn btn-danger" type="submit">Remove</button>
+										</form>
+									</div>
 								</div>
 								<% } %>
+									<% } else { %>
+										<div>
+											There is no item in the carts yet.
+										</div>
+										<% } %>
+			</div>
+			<div class="col-4">
+				<h4>Total:
+					<%= userCart.total %>
+				</h4>
+				<div class="form-group">
+					<input type="hidden" value="<%= userCart.total %>">
+					<!-- <button class="btn btn-primary btn-lg" type="submit" data-toggle="modal" data-target="#exampleModal">Checkout</button> -->
+					<form action="/payment" method="POST">
+						<script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="pk_test_5wbMktvMea4kFlWKxkRKfGfC" data-amount="999"
+						 data-name="Ale-Store" data-description="" data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+						 data-locale="auto" data-currency="eur" data-email="">
+						</script>
+						<input type="hidden" name="stripeMoney" value="9.9">
+					</form>
+				</div>
+			</div>
+		</div>
+
 	</div>

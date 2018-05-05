@@ -17,7 +17,11 @@
 		"type": "git",
 		"url": "git+https://github.com/silveridev/ale-ecommerce.git"
 	},
-	"keywords": ["Ecommerce", "nodejs", "reactjs"],
+	"keywords": [
+		"Ecommerce",
+		"nodejs",
+		"reactjs"
+	],
 	"author": "Alessandro Silveri",
 	"license": "ISC",
 	"bugs": {
@@ -42,7 +46,8 @@
 		"morgan": "^1.9.0",
 		"nodemon": "^1.17.3",
 		"passport": "^0.4.0",
-		"passport-local": "^1.0.0"
+		"passport-local": "^1.0.0",
+		"stripe": "^5.8.0"
 	},
 	"devDependencies": {
 		"jshint": "^2.9.5"
