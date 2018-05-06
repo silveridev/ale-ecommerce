@@ -23,12 +23,26 @@ route.post(
 );
 
 route.get("/profile", isAuthenticated, (req, res, next) => {
-	User.findById(req.user._id)
-		.populate("history.item")
-		.exec((error, user) => {
-			if (error) return next(error);
-			res.render("accounts/profile", { user });
-		});
+	waterfall([
+		cb => {
+			User.findById(req.user._id)
+				.populate("history.item")
+				.exec((error, user) => {
+					if (error) return next(error);
+					// res.render("accounts/profile", { user });
+					cb(error, user);
+				});
+		},
+		user => {
+			if (user.userType === "admin") {
+				User.find({ userType: "customer" }, (error, customers) => {
+					res.render("accounts/profile", { user, customers });
+				});
+			} else {
+				res.render("accounts/profile", { user });
+			}
+		}
+	]);
 });
 
 route.get("/register", (req, res) => {

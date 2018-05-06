@@ -24,5 +24,11 @@ module.exports = {
 			return next();
 		}
 		res.redirect("/login");
+	},
+	adminRoute: (req, res, next) => {
+		if (req.isAuthenticated() && req.user.userType === "admin") {
+			return next();
+		}
+		res.redirect("/");
 	}
 };
