@@ -71,11 +71,7 @@ The project was already deployed on Heroku. https://ale-store.herokuapp.com
 * [Stripe](https://stripe.com/it) - The new standard in online payments.
 * [Bootstarp](https://getbootstrap.com/) - Build responsive, mobile-first projects on the web with the world's most popular front-end component library.
 
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Authors
+## Author
 
 * **Alessandro Silveri** - _Initial work_ - [Github](https://github.com/silveridev)
 
