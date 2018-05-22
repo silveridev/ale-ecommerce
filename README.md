@@ -2,6 +2,12 @@
 
 Simple ecommerce website for the course web programming.
 
+## Student
+
+Alessandro Silveri
+
+Student Number: 087395
+
 ## Achieved Points
 
 1.  Admin is able to access a private area with an email address and password (first admin already registered);
