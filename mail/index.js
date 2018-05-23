@@ -1,4 +1,5 @@
 const nodemailer = require("nodemailer");
+const config = require("../config");
 
 module.exports = function(to, subject, text) {
 	const transporter = nodemailer.createTransport({
@@ -8,8 +9,7 @@ module.exports = function(to, subject, text) {
 			host: "smtp.gmail.com",
 			clientId:
 				"713709348701-t5ir2kbad2cpp4pdleifv1lhqr9b4f74.apps.googleusercontent.com",
-			clientSecret: "mWSWOva9wRoPZADx8TLvdTMr"
-			// refeshToken: "1/QfBXhpNY7U3gI7mGNAuhImsePd28C4ig_-DXfcrBKPo"
+			clientSecret: config.googleSecrete
 		}
 	});
 
@@ -20,9 +20,10 @@ module.exports = function(to, subject, text) {
 		text,
 		auth: {
 			user: "silveridev@gmail.com",
-			refeshToken: "1/IM-viLw4cb4Q1v84WJV8H__JZLgyfLnUcE7detwsMzE",
+			refeshToken:
+				"1/LY5KpapBbo2qysSCl9sGIf7kdFFew6FREoGAA5r7QTIYpw7ynPZs8-icpbbU88df",
 			accessToken:
-				"ya29.GlvDBVWazUzYqwCw3xxDFtNiiBGEIGyaEgLopgcTFShhTMfGgj4WlLQaRSoRw0yi8hirMc1H7UjkKvihbRzaskrSAwbjBu-pPRLxrrCaD4gD_7Dv7ve997LndULE"
+				"ya29.GlvEBSRqzPTHK1WyEdKkDakQV_hfqqy9iMKCk6xfJ6IgmqIIDTt1363mgxnYOzBGHd-tW7TN1XpZx8b_Ko3OAOzSMfVDvoXOcU6vRKfOr--SnjYVpSQ2p81topmI"
 		}
 	};
 

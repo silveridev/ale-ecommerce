@@ -54,7 +54,7 @@
 							<div class="text-danger not-enough">This product is not available in the store right now.</div>
 							<% } %>
 
-								<% if(user.userType == 'admin') { %>
+								<% if(user && user.userType == 'admin') { %>
 									<a href="/admin/product/edit/<%= product._id.toString() %>" class="btn btn-warning btn-lg">Edit</a>
 									<% } %>
 

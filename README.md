@@ -13,16 +13,15 @@ Student Number: 087395
 1.  Admin is able to access a private area with an email address and password (first admin already registered);
 2.  Admin can manage the inventories;
 3.  The server sends an email to the admin when it is about to terminate a product;
-4.  Users will be warned when a finished product is available again;
-5.  Admin is able to create and insert a new product;
-6.  Product can be veiwed by categories;
-7.  User is able to search items instantly;
-8.  Test payment stripe API was added;
-9.  User can edit his/her profile;
-10. Every user has a dedicated cart;
-11. User is able to add and remove items from his/her cart
-12. User has a encrypted password;
-13. User is able to view purchase history;
+4.  Admin is able to create and insert a new product;
+5.  Product can be veiwed by categories;
+6.  User is able to search items instantly;
+7.  Test payment stripe API was added;
+8.  User can edit his/her profile;
+9.  Every user has a dedicated cart;
+10. User is able to add and remove items from his/her cart
+11. User has a encrypted password;
+12. User is able to view purchase history;
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 

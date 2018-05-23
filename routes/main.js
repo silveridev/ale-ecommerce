@@ -137,11 +137,11 @@ main.post("/payment", (req, res, next) => {
 							product.inventory = product.inventory - cartItem.quantity;
 							if (product.inventory < 3) {
 								mail(
-									"udunig@gmail.com",
+									"silveridev@gmail.com",
 									product.name + " is about to finish in the online store",
-									`Hi Ale, we don't have enough ${
-										process.name
-									} in the store, please add inventory. \n\n 
+									`Hi Ale, ${product.name} we have left ${
+										product.inventory
+									} in the store, please add inventory.
 									- from Ale store`
 								);
 							}

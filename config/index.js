@@ -1,4 +1,5 @@
 module.exports = {
 	db: "mongodb://root:aledev@ds161939.mlab.com:61939/ecommerce",
-	secretKey: "!@#$ alessandro unicam course project ^&*("
+	secretKey: "!@#$ alessandro unicam course project ^&*(",
+	googleSecrete: "mWSWOva9wRoPZADx8TLvdTMr"
 };
