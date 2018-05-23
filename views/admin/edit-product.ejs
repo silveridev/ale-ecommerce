@@ -5,17 +5,22 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-8 offset-md-2">
-				<form method="POST" id="add-a-product">
+				<form method="POST" id="edit-a-product">
+
+					<input type="hidden" name="id" id="product_id" value="<%= product._id %>">
+
 					<div class="form-group">
 						<label for="item_name">Product name</label>
-						<input type="text" class="form-control" name="name" id="add_product_name" placeholder="Product name" required>
+						<input type="text" class="form-control" name="name" id="add_product_name" placeholder="Product name" value="<%= product.name %>"
+						 required>
 					</div>
 
 					<div class="row">
 						<div class="col-4">
 							<div class="form-group">
 								<div class="input-group mb-2">
-									<input type="number" class="form-control" name="price" id="add_product_price" placeholder="Price" required>
+									<input type="number" class="form-control" name="price" id="add_product_price" placeholder="Price" value="<%= product.price %>"
+									 required>
 									<div class="input-group-prepend">
 										<div class="input-group-text">&euro;</div>
 									</div>
@@ -28,7 +33,8 @@
 						<div class="col-4">
 							<div class="form-group">
 								<div class="input-group mb-2">
-									<input type="number" min="0" class="form-control" name="inventory" id="inventory" placeholder="Inventory" required>
+									<input type="number" min="0" class="form-control" name="inventory" id="inventory" placeholder="Inventory" value="<%= product.inventory %>"
+									 required>
 								</div>
 							</div>
 						</div>
@@ -40,11 +46,18 @@
 								<label for="categories">Category</label>
 								<select class="form-control" id="categories" name="category">
 									<% for(var i=0; i<categories.length; i++) { %>
-										<option value="<%= categories[i]._id %>">
-											<%= categories[i].name %>
-										</option>
-										<% } %>
+										<% if(categories[i]._id.toString() == product.category) { %>
+											<option selected value="<%= categories[i]._id %>">
+												<%= categories[i].name %>
+											</option>
+											<% } else { %>
+												<option value="<%= categories[i]._id %>">
+													<%= categories[i].name %>
+												</option>
+												<% } %>
+													<% } %>
 								</select>
+
 							</div>
 						</div>
 
@@ -53,7 +66,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<button type="submit" class="btn btn-success">Add product</button>
+						<button type="submit" class="btn btn-success">Save</button>
 					</div>
 				</form>
 			</div>

@@ -6,7 +6,8 @@ const ProductSchema = new mongoose.Schema({
 	price: Number,
 	image: String,
 	inventory: { type: Number, default: Math.floor(Math.random() * 16) + 5 },
-	emailList: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }]
+	emailList: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+	createdAt: { type: Date, default: Date.now }
 });
 
 function escapeRegex(text) {

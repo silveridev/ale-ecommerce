@@ -15,7 +15,7 @@
 	<div class="row justify-content-center">
 		<h3>
 			<% if (user.address === '' || typeof user.address === 'undefined' ) { %>
-				<h3>Address:
+				<h3>Shipping address:
 					<span style="color: #c0392b; font-weight: bold">You have no address yet!</span>
 				</h3>
 				<% } else { %>
@@ -64,26 +64,25 @@
 					</tbody>
 				</table>
 				<% } else { %>
-					<div class="text-warning">
+					<div class="text-warning" style="display: flex; margin-left: 1em; align-items: center">
 						You have not purchased any items yet!
 					</div>
 					<% } %>
 						<% } %>
-							<%= customers %>
-								<% if(user.userType == 'admin') { %>
-									<table class="table table-bordered">
-										<thead>
-											<tr>
-												<th scope="col">#</th>
-												<th scope="col">User Name</th>
-												<th scope="col">Product Name</th>
-												<th scope="col">Paid</th>
-												<th scope="col">Date</th>
-											</tr>
-										</thead>
-										<tbody>
-										</tbody>
-									</table>
-									<% } %>
+							<% if(user.userType == 'admin') { %>
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th scope="col">#</th>
+											<th scope="col">User Name</th>
+											<th scope="col">Product Name</th>
+											<th scope="col">Paid</th>
+											<th scope="col">Date</th>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+								<% } %>
 
 	</div>

@@ -38,7 +38,8 @@
 	function appendProduct(product) {
 		var html =
 			'<div class="col-md-4 mb-3"><div class="card"><img class="card-img-top" src="';
-		html += product.image;
+		html +=
+			"https://imgplaceholder.com/330x300/2b3e50/ffffff/fa-file-image-o?font-size=88";
 		html +=
 			'" alt="Card image cap"><div class="card-body"><h5 class="card-title">';
 		html += product.name;
@@ -54,16 +55,24 @@
 	$("#plus").on("click", function(e) {
 		e.preventDefault();
 
+		var max = parseInt($("#inventory").val());
+
 		var quantity = parseInt($("#quantity").val());
 		quantity += 1;
 
-		$("#quantity").val(quantity);
-		$("#total").html(quantity);
-		$("#totalHidden").val(quantity * $("#product_price").val());
+		if (quantity <= max) {
+			$("#quantity").val(quantity);
+			$("#total").html(quantity);
+			$("#totalHidden").val(quantity * $("#product_price").val());
+		} else {
+			$(".not-enough").text("Not enough items in the store");
+		}
 	});
 
 	$("#minus").on("click", function(e) {
 		e.preventDefault();
+
+		$(".not-enough").text("");
 
 		var quantity = parseInt($("#quantity").val());
 		if (quantity > 1) {
@@ -73,5 +82,94 @@
 			$("#total").html(quantity);
 			$("#totalHidden").val(quantity * $("#product_price").val());
 		}
+	});
+
+	// $("#overlay").on("click", function() {
+	// 	$(this).hide();
+	// });
+
+	$("#add_category").submit(function(e) {
+		e.preventDefault();
+
+		$("#overlay").show();
+
+		var categoryName = $("#category_name").val();
+
+		$.ajax({
+			method: "POST",
+			url: "/admin/category/add",
+			data: { categoryName: categoryName }
+		})
+			.done(function() {
+				location.reload(true);
+			})
+			.fail(function(error) {
+				$("#overlay").hide();
+				console.log("Error happended: ", error);
+			});
+	});
+
+	$("#add-a-product").submit(function(e) {
+		e.preventDefault();
+		$("#overlay").show();
+
+		var productName = $("#add_product_name")
+			.val()
+			.trim();
+		var productPrice = parseFloat($("#add_product_price").val());
+		var inventory = parseInt($("#inventory").val());
+		var category = $("select#categories option:checked").val();
+
+		$.ajax({
+			method: "POST",
+			url: "/admin/product/add",
+			data: {
+				name: productName,
+				price: productPrice,
+				inventory: inventory,
+				categoryId: category
+			}
+		})
+			.done(function() {
+				var origin = window.location.origin;
+				window.location.href = origin + "/";
+			})
+			.fail(function(error) {
+				$("#overlay").hide();
+				console.log("Error happended: ", error);
+			});
+	});
+
+	$("#edit-a-product").submit(function(e) {
+		e.preventDefault();
+		$("#overlay").show();
+
+		var productName = $("#add_product_name")
+			.val()
+			.trim();
+		var productPrice = parseFloat($("#add_product_price").val());
+		var inventory = parseInt($("#inventory").val());
+		var category = $("select#categories option:checked").val();
+		var productId = $("input#product_id").val();
+
+		$.ajax({
+			method: "POST",
+			url: "/admin/product/edit",
+			data: {
+				name: productName,
+				price: productPrice,
+				inventory: inventory,
+				categoryId: category,
+				id: productId
+			}
+		})
+			.done(function() {
+				var origin = window.location.origin;
+				window.location.href = origin + "/product/" + productId;
+			})
+			.fail(function(error) {
+				$("#overlay").hide();
+				console.log("Error happended: ", error);
+			});
 	});
 })(jQuery);

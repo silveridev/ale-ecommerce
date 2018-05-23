@@ -31,6 +31,7 @@ admin.post("/product/add", adminRoute, (req, res, next) => {
 	const { name, price, categoryId, inventory } = _.pick(req.body, [
 		"name",
 		"price",
+		"inventory",
 		"categoryId"
 	]);
 
@@ -44,6 +45,37 @@ admin.post("/product/add", adminRoute, (req, res, next) => {
 	product.save((error, product) => {
 		if (error) return next(error);
 		res.redirect("/");
+	});
+});
+
+admin.post("/product/edit", adminRoute, (req, res, next) => {
+	const { name, price, categoryId, inventory, id } = _.pick(req.body, [
+		"name",
+		"price",
+		"inventory",
+		"categoryId",
+		"id"
+	]);
+
+	Product.findById(id, function(error, product) {
+		product.name = name;
+		product.price = price;
+		product.category = categoryId;
+		product.inventory = inventory;
+
+		product.save((error, product) => {
+			if (error) return next(error);
+			res.redirect("/");
+		});
+	});
+});
+
+admin.get("/product/edit/:id", adminRoute, (req, res, next) => {
+	Category.find({}, (error, categories) => {
+		if (error) return next(error);
+		Product.findById(req.params.id, function(error, product) {
+			res.render("admin/edit-product", { product, categories });
+		});
 	});
 });
 

@@ -27,7 +27,10 @@
 								<%= products[i].name %>
 							</h5>
 							<p class="card-text">
-								<%= products[i].category.name %>
+								Category:
+								<span class="badge badge-pill badge-light">
+									<%= products[i].category.name %>
+								</span>
 							</p>
 							<p class="card-text">
 								<%= products[i].price %> &euro;

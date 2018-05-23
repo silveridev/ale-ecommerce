@@ -5,6 +5,7 @@ const stripe = require("stripe")("sk_test_41L0gRe94OSsJLRQHBBZIFHF");
 const waterfall = require("async/waterfall");
 const User = require("../model/user");
 const moment = require("moment");
+const mail = require("../mail");
 
 function paginate(req, res, next) {
 	const perPage = 9;
@@ -28,7 +29,6 @@ function paginate(req, res, next) {
 }
 
 main.get("/", (req, res, next) => {
-	console.log("req.isAuthenticated: ", req.isAuthenticated());
 	const { page } = req.params;
 	if (page) {
 		if (page === 1) {
@@ -132,6 +132,23 @@ main.post("/payment", (req, res, next) => {
 					});
 				},
 				function(cart, cb) {
+					cart.items.forEach(function(cartItem) {
+						Product.findById(cartItem.item, function(error, product) {
+							product.inventory = product.inventory - cartItem.quantity;
+							if (product.inventory < 3) {
+								mail(
+									"udunig@gmail.com",
+									product.name + " is about to finish in the online store",
+									`Hi Ale, we don't have enough ${
+										process.name
+									} in the store, please add inventory. \n\n 
+									- from Ale store`
+								);
+							}
+							product.save();
+						});
+					});
+
 					User.findOne({ _id: req.user._id }, (err, user) => {
 						if (user) {
 							for (var i = 0; i < cart.items.length; i++) {
@@ -149,6 +166,7 @@ main.post("/payment", (req, res, next) => {
 					});
 				},
 				function(user) {
+					// mail("udunig@gmail.com", "user paid", "just a test");
 					Cart.update(
 						{ owner: user._id },
 						{ $set: { items: [], totoal: 0 } },

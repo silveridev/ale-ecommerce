@@ -20,9 +20,9 @@ Student Number: 087395
 8.  Test payment stripe API was added;
 9.  User can edit his/her profile;
 10. Every user has a dedicated cart;
-11. User has a encrypted password;
-12. User is able to view purchase history;
-13. Admin is able to manage users;
+11. User is able to add and remove items from his/her cart
+12. User has a encrypted password;
+13. User is able to view purchase history;
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
