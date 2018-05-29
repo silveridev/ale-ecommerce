@@ -20,9 +20,9 @@ Github Repo: https://github.com/silveridev/ale-ecommerce
 
 Youtube: https://www.youtube.com/watch?v=mg337KZZQng
 
-WebSite hosted at Heroku: https://ale-store.herokuapp.com/page/1
+WebSite hosted at Heroku: https://ale-store.herokuapp.com
 
-Project Document: https://drive.google.com/open?id=1bn7Y5ZniNmmpkAzLlAhUHiIIg-KIWt3v
+Project Document: https://drive.google.com/open?id=1rzAy2ybKzm8Vy4GAO8c3wihBz3JdL11N
 
 ## Punti svolti:
 
@@ -40,26 +40,27 @@ Project Document: https://drive.google.com/open?id=1bn7Y5ZniNmmpkAzLlAhUHiIIg-KI
 11. L'utente ha una password crittografata;
 12. L'utente è in grado di visualizzare la cronologia degli acquisti;
 
-## About Project
+## Architettura del progetto
 
 Il backend è composto da NodeJS, ExpressJS e MongoDB. MongoDB è stato ospitato su mlab.com perché fornisce un servizio di hosting gratuito per MongoDB. Ho usato Mongoose per la modellazione dei dati e l'esecuzione di query per il database.
 
-## User Roles
+## Ruoli Utente
 
 Gli utenti normali (clienti) possono registrarsi al sistema. La password degli utenti è stata memorizzata in modo sicuro nel database utilizzando il modulo Bcrypt. Ogni utente ha la sua sezione dedicata al carrello. Lui / lei possono aggiungere / rimuovere articoli al carrello e eseguire il checkout. La sezione di pagamento viene eseguita da Stripe, una piattaforma di pagamento sicura che facilita i pagamenti. Gli utenti possono modificare le loro informazioni personali. Inoltre, possono visualizzare la cronologia degli acquisti, tra cui nome del prodotto, prezzo e ora del pagamento.
+
 L'amministratore può accedere a un'area privata con indirizzo email e password dell'amministratore. Può aggiungere / modificare un prodotto. Quando un prodotto sta per finire, il sistema invia automaticamente un'email all'amministratore per ricordarglielo.
 
-## Getting Started
+## Iniziamo
 
 Queste istruzioni forniranno una copia del progetto e sarà possibile eseguirlo in locale per scopi di sviluppo e test. Vedi la distribuzione per le note su come implementare il progetto su una piattaforma live. In questo documento uso Mac e il suo terminale per spiegare il progetto.
 
-### Prerequisites
+### Prerequisiti
 
 Per prima cosa è necessario installare node per preparare il proprio run-time environment. É possibile scaricare node da qui. Dopo aver installato node
 L'installazione di node viene fornita con il gestore di pacchetti NPM. Ora, è diventato il più grande open source libraries ecosystem al mondo. Ma in questo progetto ho usato yarn.
 Yarn è un’alternativa a NPM. Ho preferito yarn a NPM principalmente perché è veloce, affidabile e sicuro.
 
-### Installing
+### Installazione
 
 Per prima cosa clonare la repo e eseguire il comando sotto riportato
 
@@ -75,7 +76,7 @@ Usando yarn:
 yarn install
 ```
 
-## Running the project
+## Esecuzione del progetto
 
 Questo comando farà partire l’esecuzione de progetto.
 
