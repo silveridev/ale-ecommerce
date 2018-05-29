@@ -56,7 +56,7 @@ Queste istruzioni forniranno una copia del progetto e sarà possibile eseguirlo
 
 ### Prerequisiti
 
-Per prima cosa è necessario installare node per preparare il proprio run-time environment. É possibile scaricare node da qui. Dopo aver installato node
+Per prima cosa è necessario installare node per preparare il proprio run-time environment. É possibile scaricare node da [qui](https://nodejs.org/en/download/). Dopo aver installato node
 L'installazione di node viene fornita con il gestore di pacchetti NPM. Ora, è diventato il più grande open source libraries ecosystem al mondo. Ma in questo progetto ho usato yarn.
 Yarn è un’alternativa a NPM. Ho preferito yarn a NPM principalmente perché è veloce, affidabile e sicuro.
 
@@ -86,7 +86,7 @@ yarn dev
 
 ## Deployment
 
-Il progetto è già stato deployato su heroku. https://ale- store.herokuapp.com.
+Il progetto è già stato deployato su heroku. https://ale-store.herokuapp.com.
 
 ## Built With
 
