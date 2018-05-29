@@ -2,11 +2,11 @@
 
 Questo è un semplice sito di e-commerce per il corso di programmazione web.
 
-## Student
+## Studente
 
 Alessandro Silveri
 
-Student Number: 087395
+n.matricola: 087395
 
 ## Il sistema ha già un amministratore (L’unico admin).
 
@@ -22,7 +22,7 @@ Youtube: https://www.youtube.com/watch?v=mg337KZZQng
 
 WebSite hosted at Heroku: https://ale-store.herokuapp.com
 
-Project Document: https://drive.google.com/open?id=1rzAy2ybKzm8Vy4GAO8c3wihBz3JdL11N
+Project Document: https://drive.google.com/open?id=1ZivZQYWmkMTFiEupR2QfdDaruAmSrAct
 
 ## Punti svolti:
 
