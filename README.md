@@ -15,10 +15,13 @@ pw: 12345
 
 ## Links
 
-[Github Repo](): https://github.com/silveridev/ale-ecommerce
-[Youtube](): https://www.youtube.com/watch?v=mg337KZZQng
-[WebSite hosted at Heroku](): https://ale-store.herokuapp.com/page/1
-[Project Document](): https://drive.google.com/open?id=1bn7Y5ZniNmmpkAzLlAhUHiIIg-KIWt3v
+Github Repo: https://github.com/silveridev/ale-ecommerce
+
+Youtube: https://www.youtube.com/watch?v=mg337KZZQng
+
+WebSite hosted at Heroku: https://ale-store.herokuapp.com/page/1
+
+Project Document: https://drive.google.com/open?id=1bn7Y5ZniNmmpkAzLlAhUHiIIg-KIWt3v
 
 ## Achieved Points
 
