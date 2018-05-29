@@ -8,6 +8,18 @@ Alessandro Silveri
 
 Student Number: 087395
 
+## Admin Account
+
+username/email: ale@alestore.com
+pw: 12345
+
+## Links
+
+[Github Repo](): https://github.com/silveridev/ale-ecommerce
+[Youtube](): https://www.youtube.com/watch?v=mg337KZZQng
+[WebSite hosted at Heroku](): https://ale-store.herokuapp.com/page/1
+[Project Document](): https://drive.google.com/open?id=1bn7Y5ZniNmmpkAzLlAhUHiIIg-KIWt3v
+
 ## Achieved Points
 
 1.  Admin is able to access a private area with an email address and password (first admin already registered);
