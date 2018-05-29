@@ -1,6 +1,6 @@
 # Ale Store ([Unicam School project](http://didattica.cs.unicam.it/doku.php?id=didattica%3Atriennale%3Apw%3Aay_1617%3Amain))
 
-Simple ecommerce website for the course web programming.
+Questo è un semplice sito di e-commerce per il corso di programmazione web.
 
 ## Student
 
@@ -8,7 +8,7 @@ Alessandro Silveri
 
 Student Number: 087395
 
-## Admin Account
+## Il sistema ha già un amministratore (L’unico admin).
 
 username/email: ale@alestore.com
 
@@ -24,46 +24,52 @@ WebSite hosted at Heroku: https://ale-store.herokuapp.com/page/1
 
 Project Document: https://drive.google.com/open?id=1bn7Y5ZniNmmpkAzLlAhUHiIIg-KIWt3v
 
-## Achieved Points
+## Punti svolti:
 
-1.  Admin is able to access a private area with an email address and password (first admin already registered);
-2.  Admin can manage the inventories;
-3.  The server sends an email to the admin when it is about to terminate a product;
-4.  Admin is able to create and insert a new product;
-5.  Product can be veiwed by categories;
-6.  User is able to search items instantly;
-7.  Test payment stripe API was added;
-8.  User can edit his/her profile;
-9.  Every user has a dedicated cart;
-10. User is able to add and remove items from his/her cart
-11. User has a encrypted password;
-12. User is able to view purchase history;
+1.  L'amministratore è in grado di accedere ad un'area privata con un
+    indirizzo email e una password (primo admin già registrato);
+2.  L'amministratore può gestire gli inventari;
+3.  Il server invia un'email all'amministratore quando sta per terminare un prodotto;
+4.  L’amministratore è in grado di creare e inserire un nuovo prodotto;
+5.  Il prodotto può essere visualizzato per categorie;
+6.  L'utente è in grado di cercare oggetti all'istante;
+7.  È stata aggiunta l'API di Stripe per effettuare il pagamento di prova;
+8.  L'utente può modificare il proprio profilo;
+9.  Ogni utente ha un carrello dedicato;
+10. L'utente è in grado di aggiungere e rimuovere elementi dal suo carrello
+11. L'utente ha una password crittografata;
+12. L'utente è in grado di visualizzare la cronologia degli acquisti;
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+## About Project
+
+Il backend è composto da NodeJS, ExpressJS e MongoDB. MongoDB è stato ospitato su mlab.com perché fornisce un servizio di hosting gratuito per MongoDB. Ho usato Mongoose per la modellazione dei dati e l'esecuzione di query per il database.
+
+## User Roles
+
+Gli utenti normali (clienti) possono registrarsi al sistema. La password degli utenti è stata memorizzata in modo sicuro nel database utilizzando il modulo Bcrypt. Ogni utente ha la sua sezione dedicata al carrello. Lui / lei possono aggiungere / rimuovere articoli al carrello e eseguire il checkout. La sezione di pagamento viene eseguita da Stripe, una piattaforma di pagamento sicura che facilita i pagamenti. Gli utenti possono modificare le loro informazioni personali. Inoltre, possono visualizzare la cronologia degli acquisti, tra cui nome del prodotto, prezzo e ora del pagamento.
+L'amministratore può accedere a un'area privata con indirizzo email e password dell'amministratore. Può aggiungere / modificare un prodotto. Quando un prodotto sta per finire, il sistema invia automaticamente un'email all'amministratore per ricordarglielo.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+Queste istruzioni forniranno una copia del progetto e sarà possibile eseguirlo in locale per scopi di sviluppo e test. Vedi la distribuzione per le note su come implementare il progetto su una piattaforma live. In questo documento uso Mac e il suo terminale per spiegare il progetto.
 
 ### Prerequisites
 
-After cloning the repository,
-
-```
-node npm or yarn
-```
+Per prima cosa è necessario installare node per preparare il proprio run-time environment. É possibile scaricare node da qui. Dopo aver installato node
+L'installazione di node viene fornita con il gestore di pacchetti NPM. Ora, è diventato il più grande open source libraries ecosystem al mondo. Ma in questo progetto ho usato yarn.
+Yarn è un’alternativa a NPM. Ho preferito yarn a NPM principalmente perché è veloce, affidabile e sicuro.
 
 ### Installing
 
-First clone the repo, and run below command
+Per prima cosa clonare la repo e eseguire il comando sotto riportato
 
-Using npm:
+Usando npm:
 
 ```
 npm install
 ```
 
-Using yarn:
+Usando yarn:
 
 ```
 yarn install
@@ -71,13 +77,15 @@ yarn install
 
 ## Running the project
 
+Questo comando farà partire l’esecuzione de progetto.
+
 ```
 yarn dev
 ```
 
 ## Deployment
 
-The project was already deployed on Heroku. https://ale-store.herokuapp.com
+Il progetto è già stato deployato su heroku. https://ale- store.herokuapp.com.
 
 ## Built With
 
